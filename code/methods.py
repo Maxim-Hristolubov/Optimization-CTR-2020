@@ -98,51 +98,54 @@ def prox_SGD(f, f_gradient, g_prox, X, y, C, x0, epochs, alpha, batch_size, acce
     return w, conv
 
 from numpy import linalg as LA
-def adapt_SGD(f, f_gradient, g_prox, X, y, C, x0, epochs, L_k = 0.0001, eps = 0.1, D_0 = 0.001, accel=False):
-    w_next = w = x0.copy()
-    conv, funct = [], []
-    conv.append((w,L_k))
-    j = 0
-    for epoch in range(epochs):
-        L_k = L_k/4
-        while True:
-            L_k = L_k*2
-            r_k = int(max(D_0//(L_k*eps),1))
-            
-            (batchX, batchY, j) = next_batch(X, y, j, r_k)
-            gradient = f_gradient(w, batchX, batchY, C)
-            w_pred = w_next
-            w_next = w_pred - 1/8/L_k*gradient
-            w = w_next.copy()
-            conv.append((w,L_k))
-            if f(w_next,X,y,C)<=f(w_pred,X,y,C)+gradient.dot(w_next-w_pred)+L_k/4*LA.norm(w_next-w_pred, 2)**2+eps/2:
-                break      
-    return conv[-1][1], [x for (x,L) in conv]
 
-def adapt_SGDac(f, f_gradient, g_prox, X, y, C, x0, epochs, L_k = 0.0001, eps = 0.1, D_0 = 0.001, accel=True):
-    w_next = w = x0.copy()
-    conv, funct = [], []
-    conv.append((w,L_k))
-    A,y_k,u = 0, x0, x0
+def adapt_SGD(f, f_gradient, g_prox, X, y, C, x0, epochs, L_0 = 0.0001, eps = 0.1, D_0 = 0.001, accel=False):
+    w_pred, L_pred = x0.copy(), L_0
+    conv = []
+    w = w_pred.copy()
+    conv.append(w)
     j = 0
     for epoch in range(epochs):
-        L_k = L_k/4.
+        L_next = L_pred/4
         while True:
-            L_k = L_k*2
-            a = (1+np.sqrt(1+4*A*L_k))/2./L_k
-            A = A + a
-            r_k = int(max(3*D_0*a//eps,1))
-            w_pred = w_next
-            y_k = (a*u+(A-a)*w_pred)/A
+            L_next = L_next*2
+            r = int(max(D_0//(L_next*eps),1))
+            (batchX, batchY, j) = next_batch(X, y, j, r)
+            gradient = f_gradient(w_pred, batchX, batchY, C)
+            w_next = w_pred - 1/(8*L_next)*gradient
+            if f(w_next,batchX,batchY,C)<=f(w_pred,batchX,batchY,C)+gradient.dot(w_next-w_pred)+L_next*LA.norm(w_next-w_pred, 2)**2+eps/2:
+                break
+        w = w_next.copy()
+        conv.append(w)
+        w_pred, L_pred = w_next, L_next
+    return conv[-1], conv
+
+
+def adapt_SGDac(f, f_gradient, g_prox, X, y, C, x0, epochs, L_0 = 0.0001, eps = 0.1, D_0 = 0.01, accel=True):
+    w_pred, L_pred = x0.copy(), L_0
+    conv = []
+    w = w_pred.copy()
+    conv.append(w)
+    A_pred,y_pred,u_pred = 0, x0.copy(), x0.copy()
+    j = 0
+    for epoch in range(epochs):
+        L_next = L_pred/4.
+        while True:
+            L_next = L_next*2
+            a = (1+np.sqrt(1+4*A_pred*L_next))/2/L_next
+            A_next = A_pred + a
+            r = int(max(D_0*a//eps,1))
+            y = (a*u_pred+A_pred*w_pred)/A_next
             
-            (batchX, batchY, j) = next_batch(X, y, j, r_k)
-            gradient = f_gradient(y_k, batchX, batchY, C)
-            u = g_prox(u - 0.25*a*gradient,C)
-            w_next = (a*u+(A-a)*w_pred)/A
-            w = w_next.copy()
-            conv.append((w,L_k))
-            if f(w_next,batchX,batchY,C)<=f(y_k,batchX,batchY,C)+gradient.dot(w_next-y_k)+L_k/4*LA.norm(w_next-y_k, 2)**2+eps/L_k/a:
-                break      
-    return conv[-1][1], [x for (x,L) in conv]
+            (batchX, batchY, j) = next_batch(X, y, j, r)
+            gradient = f_gradient(y, batchX, batchY, C)
+            u_next = u_pred - 0.5*a*gradient
+            w_next = (a*u_next+A_pred*w_pred)/A_next
+            if f(w_next,batchX,batchY,C)<=f(y,batchX,batchY,C)+gradient.dot(w_next-y)+L_next*LA.norm(w_next-y, 2)**2+a/(2*A_next)*eps:
+                break 
+        w = w_next.copy()
+        conv.append(w)
+        w_pred, L_pred, A_pred, u_pred = w_next, L_next, A_next, u_next,
+    return conv[-1], conv
 
 
