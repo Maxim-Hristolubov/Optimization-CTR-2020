@@ -1,0 +1,58 @@
+\begin{thebibliography}{1}
+
+\bibitem{Ogaltsov2020}
+Aleksandr Ogaltsov Darina Dvinskikh Pavel Dvurechensky Alexander Gasnikov
+  Vladimir~G. Spokoiny.
+\newblock Adaptive gradient descent for convex and non-convex stochastic
+  optimization.
+\newblock 2020.
+
+\bibitem{Ogaltsov2019}
+Alexander~Tyurin Alexander~Ogaltsov.
+\newblock Heuristic adaptive fast gradient method in stochastic optimization
+  tasks.
+\newblock 2019.
+
+\bibitem{Hendrikx2020}
+Hadrien Hendrikx Lin Xiao S´ebastien Bubeck Francis Bach~Laurent Massouli´e.
+\newblock Statistically preconditioned accelerated gradient method for
+  distributed optimization.
+\newblock 2020.
+
+\bibitem{Gower2019}
+Robert M. Gower Nicolas Loizou Xun Qian Alibek Sailanbayev Egor Shulgin~Peter
+  Richtarik.
+\newblock Sgd: General analysis and improved rates.
+\newblock 2019.
+
+\bibitem{Ivanova2020}
+Anastasiya Ivanova Dmitry Pasechnyuk Dmitry Grishchenko Egor Shulgin~Alexander
+  Gasnikov.
+\newblock Adaptive catalyst for smooth convex optimization.
+\newblock 2020.
+
+\bibitem{Kamzolov2020}
+Alexander~Gasnikov Dmitry~Kamzolov.
+\newblock Near-optimal hyperfast second-order method for convex optimization
+  and its sliding.
+\newblock 2020.
+
+\bibitem{Nesterov2010}
+Yu. Nesterov.
+\newblock Efficiency of coordinate descent methods on huge-scale optimization
+  problems.
+\newblock 2010.
+
+\bibitem{Peter2011}
+Martin~Takáč Peter~Richtárik.
+\newblock Iteration complexity of randomized block-coordinate descent methods
+  for minimizing a composite function.
+\newblock 2011.
+
+\bibitem{Xiao2014}
+Tong~Zhang Lin~Xiao.
+\newblock A proximal stochastic gradient method with progressive variance
+  reduction.
+\newblock 2014.
+
+\end{thebibliography}

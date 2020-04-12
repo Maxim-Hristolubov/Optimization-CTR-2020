@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: Hristolubov_logloss2020.aux
+The style file: unsrt.bst
+Database file #1: biblio2.bib
+Warning--empty journal in Ogaltsov2020
+Warning--empty journal in Ogaltsov2019
+Warning--empty journal in Hendrikx2020
+Warning--empty journal in Gower2019
+Warning--empty journal in Ivanova2020
+Warning--empty journal in Kamzolov2020
+Warning--empty journal in Nesterov2010
+Warning--empty journal in Peter2011
+Warning--empty journal in Xiao2014
+You've used 9 entries,
+            1791 wiz_defined-function locations,
+            495 strings with 5294 characters,
+and the built_in function-call counts, 1172 in all, are:
+= -- 90
+> -- 36
+< -- 0
++ -- 18
+- -- 9
+* -- 29
+:= -- 216
+add.period$ -- 27
+call.type$ -- 9
+change.case$ -- 9
+chr.to.int$ -- 0
+cite$ -- 18
+duplicate$ -- 72
+empty$ -- 127
+format.name$ -- 9
+if$ -- 244
+int.to.chr$ -- 0
+int.to.str$ -- 9
+missing$ -- 9
+newline$ -- 48
+num.names$ -- 9
+pop$ -- 45
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 27
+stack$ -- 0
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 9
+while$ -- 9
+width$ -- 10
+write$ -- 83
+(There were 9 warnings)
